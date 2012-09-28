@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'ofx-parser'
+require '../lib/ofx-parser'
 
 class OfxParserTest < Test::Unit::TestCase
 
