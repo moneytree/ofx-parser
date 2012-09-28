@@ -36,8 +36,10 @@ NEWFILEUID:NONE
         <CURDEF>USD</CURDEF>
         <BANKACCTFROM>
           <BANKID>033000033</BANKID>
+          <BRANCHID>01234</BRANCHID>
           <ACCTID>103333333333</ACCTID>
           <ACCTTYPE>CHECKING</ACCTTYPE>
+          <ACCTKEY>Are you the gatekeeper?</ACCTKEY>
         </BANKACCTFROM>
         <BANKTRANLIST>
           <DTSTART>20070604190000.000[-5:CDT]</DTSTART>
@@ -47,6 +49,7 @@ NEWFILEUID:NONE
             <DTPOSTED>20070606120000.000</DTPOSTED>
             <TRNAMT>-11.11</TRNAMT>
             <FITID>11111111 22</FITID>
+            <PAYEEID>12345
             <NAME>WEB AUTHORIZED PMT FOO INC</NAME>
             <MEMO>Download from usbank.com. FOO INC</MEMO>
           </STMTTRN>
@@ -55,6 +58,7 @@ NEWFILEUID:NONE
             <DTPOSTED>20070607120000.000</DTPOSTED>
             <TRNAMT>-111.11</TRNAMT>
             <FITID>22222A</FITID>
+            <PAYEEID>54321
             <CHECKNUM>0000009611</CHECKNUM>
             <NAME>CHECK</NAME>
             <MEMO>Download from usbank.com.</MEMO>

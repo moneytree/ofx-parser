@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/ofx-parser/version', __FILE__)
+require File.expand_path("../lib/ofx-parser.rb",__FILE__) 
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Andrew A. Smith"]
