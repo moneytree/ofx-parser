@@ -286,6 +286,7 @@ class OfxParserTest < Test::Unit::TestCase
     acct = silence_warnings { ofx.credit_card }
 
     assert_equal 'XXXXXXXXXXXX1111', acct.number
+    assert_equal 'I am the keymaster', acct.account_key
     assert_equal '19000.99', acct.remaining_credit
     assert_equal 1900099, acct.remaining_credit_in_pennies
     assert_equal DateTime.civil(2007,6,23,19,20,13), acct.remaining_credit_date
