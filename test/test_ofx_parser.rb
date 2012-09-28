@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'ofx-parser'
+require '../lib/ofx-parser'
 
 class OfxParserTest < Test::Unit::TestCase
 
@@ -98,6 +98,8 @@ class OfxParserTest < Test::Unit::TestCase
 
     assert_equal '103333333333', acct.number
     assert_equal '033000033', acct.routing_number
+    assert_equal '01234', acct.branch_id
+    assert_equal 'Are you the gatekeeper?', acct.account_key
     assert_equal :CHECKING, acct.type
     assert_equal '1234.09', acct.balance
     assert_equal 123409, acct.balance_in_pennies
@@ -119,6 +121,7 @@ class OfxParserTest < Test::Unit::TestCase
     assert_equal '-11.11', transactions[0].amount
     assert_equal -1111, transactions[0].amount_in_pennies
     assert_equal '11111111 22', transactions[0].fit_id
+    assert_equal '12345', transactions[0].payee_id
     assert_equal nil, transactions[0].check_number
     assert_equal nil, transactions[0].sic
     assert_equal nil, transactions[0].sic_desc
@@ -131,6 +134,7 @@ class OfxParserTest < Test::Unit::TestCase
     assert_equal '-111.11', transactions[1].amount
     assert_equal -11111, transactions[1].amount_in_pennies
     assert_equal '22222A', transactions[1].fit_id
+    assert_equal '54321', transactions[1].payee_id
     assert_equal '0000009611', transactions[1].check_number
     assert_equal nil, transactions[1].sic
     assert_equal nil, transactions[1].sic_desc
@@ -143,6 +147,7 @@ class OfxParserTest < Test::Unit::TestCase
     assert_equal '1111.11', transactions[2].amount
     assert_equal 111111, transactions[2].amount_in_pennies
     assert_equal 'X34AE33', transactions[2].fit_id
+    assert_equal nil, transactions[2].payee_id
     assert_equal nil, transactions[2].check_number
     assert_equal nil, transactions[2].sic
     assert_equal nil, transactions[2].sic_desc
@@ -155,6 +160,7 @@ class OfxParserTest < Test::Unit::TestCase
     assert_equal '11.11', transactions[3].amount
     assert_equal 1111, transactions[3].amount_in_pennies
     assert_equal '8 8 9089743', transactions[3].fit_id
+    assert_equal nil, transactions[3].payee_id
     assert_equal nil, transactions[3].check_number
     assert_equal nil, transactions[3].sic
     assert_equal nil, transactions[3].sic_desc
@@ -280,6 +286,7 @@ class OfxParserTest < Test::Unit::TestCase
     acct = silence_warnings { ofx.credit_card }
 
     assert_equal 'XXXXXXXXXXXX1111', acct.number
+    assert_equal 'I am the keymaster', acct.account_key
     assert_equal '19000.99', acct.remaining_credit
     assert_equal 1900099, acct.remaining_credit_in_pennies
     assert_equal DateTime.civil(2007,6,23,19,20,13), acct.remaining_credit_date
