@@ -4,7 +4,7 @@ require File.expand_path("../lib/ofx-parser.rb",__FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Andrew A. Smith"]
   gem.email         = ["andy@tinnedfruit.org"]
-  gem.description   = %q{TODO: Write a gem description}
+  gem.description   = %q{ofx-parser is a ruby library to parse a realistic subset of the lengthy OFX 1.x specification.}
   gem.summary       = %q{ofx-parser is a ruby library for parsing OFX 1.x data.}
   gem.homepage      = "http://ofx-parser.rubyforge.org/"
 
