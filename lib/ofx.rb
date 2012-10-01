@@ -94,7 +94,7 @@ module OfxParser
   end
 
   class CreditAccount < Account
-    attr_accessor :remaining_credit, :remaining_credit_date, :balance, :balance_date
+    attr_accessor :remaining_credit, :remaining_credit_date, :balance, :balance_date, :payment_due_date, :min_payment_due
 
     include MonetarySupport
     extend MonetaryClassSupport

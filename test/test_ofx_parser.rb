@@ -94,7 +94,7 @@ class OfxParserTest < Test::Unit::TestCase
   def test_single_bank_account
     ofx = OfxParser::OfxParser.parse(OFX_FILES[:banking])
 
-    acct = silence_warnings { ofx.bank_account }
+    acct = ofx.bank_accounts.first
 
     assert_equal '103333333333', acct.number
     assert_equal '033000033', acct.routing_number
@@ -283,7 +283,7 @@ class OfxParserTest < Test::Unit::TestCase
   def test_single_credit_card
     ofx = OfxParser::OfxParser.parse(OFX_FILES[:creditcard])
 
-    acct = silence_warnings { ofx.credit_card }
+    acct = ofx.credit_accounts.first
 
     assert_equal 'XXXXXXXXXXXX1111', acct.number
     assert_equal 'I am the keymaster', acct.account_key
@@ -294,6 +294,9 @@ class OfxParserTest < Test::Unit::TestCase
     assert_equal -111101, acct.balance_in_pennies
     assert_equal DateTime.civil(2007,6,23,19,20,13), acct.balance_date
     assert_equal '0', acct.transaction_uid
+
+    assert_equal '52495', acct.min_payment_due
+    assert_equal DateTime.civil(2012,8,10,0,0,0), acct.payment_due_date
 
     statement = acct.statement
 
