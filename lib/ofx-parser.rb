@@ -92,8 +92,9 @@ module OfxParser
 
       # Credit Cards
       credit_card_fragment = (doc/"CREDITCARDMSGSRSV1/CCSTMTTRNRS")
+      credit_card_end_fragment = (doc/"CREDITCARDMSGSRSV1/CCSTMTENDTRNRS")
       ofx.credit_accounts = credit_card_fragment.collect do |fragment|
-        build_credit(fragment)
+        build_credit(fragment, credit_card_end_fragment)
       end
 
       # Investments (?)
@@ -154,7 +155,7 @@ module OfxParser
       acct
     end
 
-    def self.build_credit(doc)
+    def self.build_credit(doc, end_doc)
       acct = CreditAccount.new
 
       acct.number = (doc/"CCSTMTRS/CCACCTFROM/ACCTID").inner_text
@@ -164,6 +165,9 @@ module OfxParser
       acct.balance_date = parse_datetime((doc/"CCSTMTRS/LEDGERBAL/DTASOF").inner_text)
       acct.remaining_credit = (doc/"CCSTMTRS/AVAILBAL/BALAMT").inner_text
       acct.remaining_credit_date = parse_datetime((doc/"CCSTMTRS/AVAILBAL/DTASOF").inner_text)
+
+      acct.payment_due_date = parse_datetime((end_doc/"CCSTMTENDRS/CCCLOSING/DTPMTDUE").inner_text)
+      acct.min_payment_due = (end_doc/"CCSTMTENDRS/CCCLOSING/MINPMTDUE").inner_text
 
       statement = Statement.new
       statement.currency = (doc/"CCSTMTRS/CURDEF").inner_text
