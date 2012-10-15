@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path("../lib/ofx-parser.rb",__FILE__) 
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Andrew A. Smith"]
@@ -14,5 +13,5 @@ Gem::Specification.new do |gem|
   gem.name          = "ofx-parser"
   gem.require_paths = ["lib"]
   gem.add_dependency("hpricot",">= 0.6")
-  gem.version       = OfxParser::VERSION
+  gem.version       = '1.1.2'
 end
